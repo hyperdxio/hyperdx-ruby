@@ -36,7 +36,7 @@ module Hyperdx
 
       ip =  opts.key?(:ip) ? "&ip=#{opts[:ip]}" : ""
       mac = opts.key?(:mac) ? "&mac=#{opts[:mac]}" : ""
-      url = "#{endpoint}?hostname=#{hostname}#{mac}#{ip}"
+      url = "#{endpoint}?hostname=#{hostname}#{mac}#{ip}&hdx_platform=ruby"
       uri = URI(url)
 
       request = Net::HTTP::Post.new(uri.request_uri, "Content-Type" => "application/json")
