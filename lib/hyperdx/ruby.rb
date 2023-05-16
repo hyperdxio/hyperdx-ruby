@@ -27,16 +27,16 @@ module Hyperdx
       @internal_logger = Logger.new($stdout)
       @internal_logger.level = Logger::DEBUG
       endpoint = opts[:endpoint] || Resources::ENDPOINT
-      hostname = opts[:hostname] || Socket.gethostname
+      @hostname = opts[:hostname] || Socket.gethostname
 
-      if hostname.size > Resources::MAX_INPUT_LENGTH || @app.size > Resources::MAX_INPUT_LENGTH
+      if @hostname.size > Resources::MAX_INPUT_LENGTH || @app.size > Resources::MAX_INPUT_LENGTH
         @internal_logger.debug("Hostname or Appname is over #{Resources::MAX_INPUT_LENGTH} characters")
         return
       end
 
-      ip =  opts.key?(:ip) ? "&ip=#{opts[:ip]}" : ""
-      mac = opts.key?(:mac) ? "&mac=#{opts[:mac]}" : ""
-      url = "#{endpoint}?hostname=#{hostname}#{mac}#{ip}&hdx_platform=ruby"
+      @ip =  opts.key?(:ip) ? opts[:ip] : ""
+      @mac = opts.key?(:mac) ? opts[:mac] : ""
+      url = "#{endpoint}?hdx_platform=ruby"
       uri = URI(url)
 
       request = Net::HTTP::Post.new(uri.request_uri, "Content-Type" => "application/json")
@@ -48,8 +48,11 @@ module Hyperdx
     def default_opts
       {
         app: @app,
-        level: @log_level,
         env: @env,
+        hostname: @hostname,
+        ip: @ip,
+        level: @log_level,
+        mac: @mac,
         meta: @meta,
       }
     end

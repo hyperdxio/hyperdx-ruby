@@ -56,7 +56,7 @@ module Hyperdx
 
     def process_message(msg, opts = {})
       processed_message = {
-        line: msg,
+        message: msg,
         app: opts[:app],
         level: opts[:level],
         env: opts[:env],
