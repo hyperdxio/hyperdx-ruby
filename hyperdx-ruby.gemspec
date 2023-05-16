@@ -1,4 +1,3 @@
-Found no changes, using resolution from the lockfile
 # frozen_string_literal: true
 
 require_relative "lib/hyperdx/ruby/version"
@@ -13,7 +12,7 @@ Gem::Specification.new do |spec|
   spec.description = ""
   spec.homepage = "https://github.com/hyperdxio/hyperdx-ruby"
   spec.license = "MIT"
-  spec.required_ruby_version = ">= 2.6.0"
+  spec.required_ruby_version = ">= 2.5.0"
 
   # spec.metadata["homepage_uri"] = spec.homepage
   # spec.metadata["source_code_uri"] = "TODO: Put your gem's public repo URL here."
@@ -29,6 +28,9 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency "concurrent-ruby", "~> 1.0"
   spec.add_runtime_dependency "json", "~> 2.0"
   spec.add_runtime_dependency "require_all", "~> 1.4"
+
+  spec.add_development_dependency "minitest", "~> 5.18"
+  spec.add_development_dependency "rubocop", "~> 0.78"
 
   # For more information and examples about making a new gem, check out our
   # guide at: https://bundler.io/guides/creating_gem.html
