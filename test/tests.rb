@@ -36,10 +36,10 @@ class TestHyperDXRuby < Minitest::Test
       server = server_generator.start_server(port)
       recieved_data = server_generator.accept_logs_and_respond(server, "HTTP/1.1 200 OK")
 
-      assert_equal(recieved_data[:ls][0][:line], LOG_LINE)
-      assert_equal(recieved_data[:ls][0][:app], options[:app])
-      assert_equal(recieved_data[:ls][0][:level], expected_level)
-      assert_equal(recieved_data[:ls][0][:env], options[:env])
+      assert_equal(recieved_data[0][:line], LOG_LINE)
+      assert_equal(recieved_data[0][:app], options[:app])
+      assert_equal(recieved_data[0][:level], expected_level)
+      assert_equal(recieved_data[0][:env], options[:env])
     end
 
     assert hyperdx_thread.join(10), "HyperDX thread timeout for port #{port}"
@@ -66,8 +66,8 @@ class TestHyperDXRuby < Minitest::Test
       recieved_data2 = server_generator.accept_logs_and_respond(server, "HTTP/1.1 200 OK")
 
       # The order of recieved lines is unpredictable.
-      assert_includes([recieved_data1[:ls][0][:line], recieved_data2[:ls][0][:line]], LOG_LINE)
-      assert_includes([recieved_data1[:ls][0][:line], recieved_data2[:ls][0][:line]], second_line)
+      assert_includes([recieved_data1[0][:line], recieved_data2[0][:line]], LOG_LINE)
+      assert_includes([recieved_data1[0][:line], recieved_data2[0][:line]], second_line)
     end
 
     assert server_thread.join(10), "Server thread timeout for retry test"

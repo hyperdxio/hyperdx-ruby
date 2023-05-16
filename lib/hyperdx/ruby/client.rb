@@ -130,10 +130,7 @@ module Hyperdx
     end
 
     def try_request(slice)
-      body = {
-        e: "ls",
-        ls: slice
-      }.to_json
+      body = slice.to_json
 
       flush_id = "#{SecureRandom.uuid} [#{slice.length} lines]"
       error_header = "Flush {#{flush_id}} failed."

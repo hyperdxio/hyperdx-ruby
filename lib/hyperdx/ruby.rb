@@ -40,7 +40,7 @@ module Hyperdx
       uri = URI(url)
 
       request = Net::HTTP::Post.new(uri.request_uri, "Content-Type" => "application/json")
-      request.basic_auth("username", key)
+      request['Authorization'] = "Bearer #{key}"
       request[:'user-agent'] = opts[:'user-agent'] || "ruby/#{Hyperdx::VERSION}"
       @client = Hyperdx::Client.new(request, uri, opts)
     end
