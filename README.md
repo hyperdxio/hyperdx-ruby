@@ -1,5 +1,26 @@
 # Hyperdx::Ruby
 
+> **Deprecated:** `hyperdx-ruby` is no longer maintained, and the ClickStack
+> SDKs do not cover Ruby. This gem was a `Logger` that posted log lines to
+> HyperDX's old HTTP input. Use the upstream
+> [OpenTelemetry Ruby SDK](https://opentelemetry.io/docs/languages/ruby/)
+> instead. Its logs support is still in development. To send logs:
+>
+> - From Ruby's `Logger`: add `opentelemetry-sdk`, `opentelemetry-logs-sdk`,
+>   `opentelemetry-exporter-otlp-logs`, and
+>   [`opentelemetry-instrumentation-logger`](https://github.com/open-telemetry/opentelemetry-ruby-contrib/tree/main/instrumentation/logger),
+>   then call `c.use 'OpenTelemetry::Instrumentation::Logger'` inside
+>   `OpenTelemetry::SDK.configure`.
+> - Without the SDK: write logs to stdout or a file and collect them with the
+>   OpenTelemetry Collector's
+>   [filelog receiver](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/filelogreceiver).
+>
+> For traces, add `opentelemetry-sdk`, `opentelemetry-exporter-otlp`, and
+> `opentelemetry-instrumentation-all`. Point the SDK at your collector with
+> `OTEL_EXPORTER_OTLP_ENDPOINT`, pass your ingestion key with
+> `OTEL_EXPORTER_OTLP_HEADERS=authorization=<key>`, and name your service with
+> `OTEL_SERVICE_NAME`.
+
 TODO: Delete this and the text below, and describe your gem
 
 Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/hyperdx/ruby`. To experiment with that code, run `bin/console` for an interactive prompt.
